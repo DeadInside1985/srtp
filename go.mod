@@ -1,4 +1,4 @@
-module github.com/pion/srtp/v3
+module github.com/DeadInside1985/srtp/v3
 
 go 1.14
 
