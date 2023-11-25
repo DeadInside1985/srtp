@@ -124,7 +124,7 @@ func (s *session) start(localMasterKey, localMasterSalt, remoteMasterKey, remote
 		return err
 	}
 
-	if err = s.nextConn.SetReadDeadline(s.acceptStreamTimeout); err != nil {
+	if err = s.nextConn.SetDeadline(time.Now().Add(time.Minute)); err != nil {
 		return err
 	}
 
@@ -148,6 +148,8 @@ func (s *session) start(localMasterKey, localMasterSalt, remoteMasterKey, remote
 				}
 				return
 			}
+
+			s.nextConn.SetDeadline(time.Now().Add(time.Minute))
 
 			if err = child.decrypt(b[:i]); err != nil {
 				s.log.Info(err.Error())
